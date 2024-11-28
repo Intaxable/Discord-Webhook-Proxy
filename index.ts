@@ -287,14 +287,23 @@ app.get("/", async (req, res) => {
                 total: 1
             }
         }
-    ])
+    ]);
+
+    if (requests.length === 0) {
+        return res.render("pages/index", {
+            total: 0,
+            length: 0,
+            uptime: uptimeMemCache.toFixed(2) || 1000
+        });
+    }
 
     res.render("pages/index", {
         total: requests[0].count,
         length: requests[0].total,
         uptime: uptimeMemCache.toFixed(2) || 1000
-    })
-})
+    });
+});
+
 
 app.get("/api/webhooks/:id/:token", limiter, (req, res) => {
     caches.findById(req.params.id).then(result => {
