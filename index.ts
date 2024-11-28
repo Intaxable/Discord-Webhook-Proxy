@@ -90,7 +90,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
 }))
 
 app.use(bodyParser.json({ limit: '8mb' }));
-app.use(bodyParser.urlencoded({ limit: '8mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '8mb' }));
 
 app.use((req, res, next) => {
     res.header("X-Powered-By", "HyraWebhookProxy/2.0");
