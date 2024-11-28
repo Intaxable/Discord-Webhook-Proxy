@@ -25,7 +25,7 @@ import { monitoring } from './routes/monitor';
 import { networkInterfaces, hostname } from 'os';
 import https from 'https';
 import { caches } from './models/cache';
-const port = process.env.PORT || 4000;
+const port = parseInt(process.env.PORT || "4000", 10);
 
 /*
     To allow us to send a larger volume of requests, we need to attach multiple IP
