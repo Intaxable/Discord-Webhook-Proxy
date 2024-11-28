@@ -415,7 +415,14 @@ app.delete("/api/webhooks/:id/:token/messages/:messageId", limiter, (req, res) =
 })
 
 mongoose.connect(process.env.MONGO_URI as string).then(() => {
-    app.listen(port, '0.0.0.0', () => {
-        console.log("🙌 Listening for Requests")
-    })
+    try {
+        app.listen(PORT, '0.0.0.0', () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+    } catch (error) {
+        console.error('Failed to start the server:', error);
+        process.exit(1); // Exit with error code
+    }
 })
+console.log(`PORT is set to: ${process.env.PORT}`);
+
