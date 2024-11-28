@@ -25,6 +25,7 @@ import { monitoring } from './routes/monitor';
 import { networkInterfaces, hostname } from 'os';
 import https from 'https';
 import { caches } from './models/cache';
+const port = process.env.PORT || 4000;
 
 /*
     To allow us to send a larger volume of requests, we need to attach multiple IP
@@ -414,7 +415,7 @@ app.delete("/api/webhooks/:id/:token/messages/:messageId", limiter, (req, res) =
 })
 
 mongoose.connect(process.env.MONGO_URI as string).then(() => {
-    app.listen(7053, () => {
+    app.listen(port, () => {
         console.log("🙌 Listening for Requests")
     })
 })
